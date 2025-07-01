@@ -2,7 +2,14 @@
 
 A full-stack application that analyzes job descriptions and generates ATS-optimized CVs tailored to specific job requirements.
 
-## 🚀 Features
+## � Documentation
+
+- **[Quick Start Guide](QUICK_START.md)** - Get up and running in 5 minutes
+- **[API Documentation](#-api-endpoints)** - Backend API reference
+- **[Contributing Guidelines](#-contributing)** - How to contribute to the project
+- **[License](LICENSE)** - MIT License information
+
+## �🚀 Features
 
 - **Job Description Analysis**: Uses NLP to extract keywords, skills, and requirements
 - **ATS Optimization**: Tailors CV content to match job postings
@@ -47,7 +54,11 @@ ATS-Smart/
 └── README.md                     # Project documentation
 ```
 
-## 🛠️ Installation & Setup
+## � Quick Start
+
+**Want to get started immediately?** Check out our [Quick Start Guide](QUICK_START.md) for a 5-minute setup!
+
+## �🛠️ Installation & Setup
 
 ### Prerequisites
 - Python 3.8+
