@@ -27,6 +27,7 @@ A full-stack application that analyzes job descriptions and generates ATS-optimi
 ## 🏗️ Architecture
 
 ### Backend (Flask API)
+
 - **Technology**: Python, Flask, SQLAlchemy
 - **NLP**: NLTK for job description analysis
 - **PDF Generation**: ReportLab for professional CV creation
@@ -34,6 +35,7 @@ A full-stack application that analyzes job descriptions and generates ATS-optimi
 - **API**: RESTful endpoints for frontend communication
 
 ### Frontend (React SPA)
+
 - **Technology**: React, Vite, Tailwind CSS
 - **Components**: Radix UI for consistent design
 - **State Management**: React hooks for form data
@@ -41,7 +43,7 @@ A full-stack application that analyzes job descriptions and generates ATS-optimi
 
 ## 📁 Project Structure
 
-```
+```text
 ATS-Smart/
 ├── cv-generator-backend/          # Flask API server
 │   ├── src/
@@ -67,6 +69,7 @@ ATS-Smart/
 ## �🛠️ Installation & Setup
 
 ### Prerequisites
+
 - Python 3.8+
 - Node.js 16+
 - npm or yarn
@@ -74,53 +77,63 @@ ATS-Smart/
 ### Backend Setup
 
 1. **Navigate to backend directory**
-   ```bash
-   cd cv-generator-backend
-   ```
+
+    ```bash
+    cd cv-generator-backend
+    ```
 
 2. **Create virtual environment**
-   ```bash
-   python -m venv venv
-   source venv/bin/activate  # On Windows: venv\Scripts\activate
-   ```
+
+    ```bash
+    python -m venv venv
+    source venv/bin/activate  # On Windows: venv\Scripts\activate
+    ```
 
 3. **Install dependencies**
-   ```bash
-   pip install -r requirements.txt
-   ```
+
+    ```bash
+    pip install -r requirements.txt
+    ```
 
 4. **Download NLTK data**
-   ```bash
-   python -c "import nltk; nltk.download('punkt'); nltk.download('stopwords'); nltk.download('punkt_tab'); nltk.download('averaged_perceptron_tagger')"
-   ```
+
+    ```bash
+    python -c "import nltk; nltk.download('punkt'); nltkdownload('stopwords'); nltk.download('punkt_tab'); nltkdownload('averaged_perceptron_tagger')"
+    ```
 
 5. **Start the server**
-   ```bash
-   python app.py
-   ```
-   Backend will run on `http://localhost:5002`
+
+    ```bash
+    python app.py
+    ```
+
+Backend will run on `http://localhost:5002`
 
 ### Frontend Setup
 
 1. **Navigate to frontend directory**
-   ```bash
-   cd cv-generator-frontend
-   ```
+
+    ```bash
+    cd cv-generator-frontend
+    ```
 
 2. **Install dependencies**
-   ```bash
-   npm install
-   # or
-   yarn install
-   ```
+
+    ```bash
+        npm install
+        # or
+        yarn install
+    ```
 
 3. **Start development server**
+
    ```bash
-   npm run dev
-   # or
-   yarn dev
+        npm run dev
+        # or
+        yarn dev
    ```
-   Frontend will run on `http://localhost:5173`
+
+Frontend will run on `http://localhost:5173`
 
 ## 🔄 Usage
 
@@ -142,11 +155,13 @@ ATS-Smart/
 ## 🔧 Configuration
 
 ### Backend Configuration
+
 - **Port**: 5002 (configurable in `app.py`)
 - **Database**: SQLite (configurable in `src/main.py`)
 - **CORS**: Enabled for all origins (production: configure specific origins)
 
 ### Frontend Configuration
+
 - **Port**: 5173 (configurable in `vite.config.js`)
 - **API Proxy**: Points to backend at `http://localhost:5002`
 - **Build Output**: `dist/` directory
@@ -154,6 +169,7 @@ ATS-Smart/
 ## 🚀 Deployment
 
 ### Backend Deployment
+
 ```bash
 # Production setup
 pip install gunicorn
@@ -161,6 +177,7 @@ gunicorn -w 4 -b 0.0.0.0:5002 app:app
 ```
 
 ### Frontend Deployment
+
 ```bash
 # Build for production
 npm run build
@@ -194,4 +211,6 @@ If you encounter any issues or have questions, please [open an issue](https://gi
 
 ---
 
-**Made with ❤️ for job seekers everywhere**
+### Made with ❤️ for job seekers everywhere
+
+
