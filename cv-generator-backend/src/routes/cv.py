@@ -51,15 +51,15 @@ def analyze_job_description():
             return jsonify({'error': 'Job description is empty.'}), 400
         
         # Analyze job description
-        analysis = job_analyzer.analyze_job_description(job_text)
+        analysis_result = job_analyzer.analyze_job_description(job_text)
         
         return jsonify({
             'success': True,
-            'analysis': analysis
+            'analysis': analysis_result
         })
         
     except Exception as e:
-        return jsonify({'error': f'Failed to analyze job description: {str(e)}'}), 500
+        return jsonify({'error': f'Analysis failed: {str(e)}'}), 500
 
 @cv_bp.route('/generate-cv', methods=['POST'])
 def generate_cv():
@@ -181,4 +181,29 @@ def get_sample_data():
         'success': True,
         'sample_data': sample_data
     })
+
+@cv_bp.route('/validate-ats', methods=['POST'])
+def validate_ats_compatibility():
+    """Validate CV data for ATS compatibility"""
+    try:
+        if not request.is_json:
+            return jsonify({'error': 'Request must be JSON'}), 400
+        
+        data = request.get_json()
+        user_data = data.get('user_data', {})
+        job_analysis = data.get('job_analysis')
+        
+        if not user_data:
+            return jsonify({'error': 'No user data provided'}), 400
+        
+        # Validate ATS compatibility
+        validation_result = cv_generator.validate_ats_compatibility(user_data, job_analysis)
+        
+        return jsonify({
+            'success': True,
+            'validation': validation_result
+        })
+        
+    except Exception as e:
+        return jsonify({'error': f'Validation failed: {str(e)}'}), 500
 

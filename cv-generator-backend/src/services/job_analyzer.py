@@ -90,6 +90,9 @@ class JobAnalyzer:
         # Extract job title and company info
         job_info = self._extract_job_info(text)
         
+        # Calculate ATS optimization score
+        ats_score = self._calculate_ats_score(keywords, technical_skills, soft_skills)
+        
         return {
             'keywords': keywords,
             'technical_skills': technical_skills,
@@ -97,10 +100,40 @@ class JobAnalyzer:
             'experience_level': experience_level,
             'education_requirements': education_requirements,
             'job_info': job_info,
+            'ats_score': ats_score,
             'optimization_suggestions': self._generate_optimization_suggestions(
                 keywords, technical_skills, soft_skills
             )
         }
+
+    def _calculate_ats_score(self, keywords: List[str], technical_skills: List[str], soft_skills: List[str]) -> Dict:
+        """Calculate ATS optimization score based on job analysis"""
+        score_factors = {
+            'keyword_density': min(len(keywords), 20) * 5,  # Max 100 points
+            'technical_skills': min(len(technical_skills), 10) * 10,  # Max 100 points
+            'soft_skills': min(len(soft_skills), 8) * 12.5,  # Max 100 points
+        }
+        
+        total_score = sum(score_factors.values()) / 3  # Average of all factors
+        
+        return {
+            'overall_score': round(total_score, 1),
+            'factors': score_factors,
+            'grade': self._get_score_grade(total_score)
+        }
+
+    def _get_score_grade(self, score: float) -> str:
+        """Convert numerical score to letter grade"""
+        if score >= 90:
+            return 'A+'
+        elif score >= 80:
+            return 'A'
+        elif score >= 70:
+            return 'B'
+        elif score >= 60:
+            return 'C'
+        else:
+            return 'D'
 
     def _extract_keywords(self, text: str) -> List[str]:
         """Extract important keywords from job description"""

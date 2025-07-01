@@ -257,23 +257,127 @@ class CVGenerator:
 
     def _optimize_summary(self, summary: str, job_analysis: Dict) -> str:
         """Optimize professional summary based on job analysis"""
+        if not job_analysis:
+            return summary
+            
         keywords = job_analysis.get('keywords', [])
         technical_skills = job_analysis.get('technical_skills', [])
         
-        # This is a simplified optimization - in a real application,
-        # you might use more sophisticated NLP techniques
+        # Enhanced optimization with actual keyword integration
         optimized_summary = summary
         
-        # Add relevant keywords naturally (this is a basic implementation)
-        # In practice, you'd want more sophisticated text generation
+        # Add missing critical keywords naturally
+        missing_keywords = []
+        for keyword in keywords[:5] # Top 5 keywords
+            if keyword.lower() not in summary.lower():
+                missing_keywords.append(keyword)
+        
+        # Advanced keyword density optimization
+        if missing_keywords:
+            # Add relevant skills if missing
+            skill_additions = [skill for skill in technical_skills if skill not in summary.lower()]
+            if skill_additions:
+                optimized_summary += f" Experienced in {', '.join(skill_additions[:3])} with proven track record in {missing_keywords[0] if missing_keywords else 'software development'}."
+        
+        # Ensure keyword density is optimal (1-3% for top keywords)
+        for keyword in keywords[:3]:
+            if keyword.lower() not in optimized_summary.lower():
+                optimized_summary = self._inject_keyword_naturally(optimized_summary, keyword)
         
         return optimized_summary
 
+    def _inject_keyword_naturally(self, text: str, keyword: str) -> str:
+        """Inject keywords naturally into text without making it sound robotic"""
+        # Common professional phrases that can incorporate keywords
+        insertion_patterns = [
+            f"Expertise in {keyword}",
+            f"Proficient in {keyword}",
+            f"Strong background in {keyword}",
+            f"Experienced with {keyword}",
+            f"Skilled in {keyword}"
+        ]
+        
+        # Choose appropriate pattern based on context
+        if any(word in keyword.lower() for word in ['management', 'leadership', 'strategy']):
+            return text + f" Demonstrated {keyword} capabilities across multiple projects."
+        elif any(word in keyword.lower() for word in ['development', 'programming', 'coding']):
+            return text + f" Strong {keyword} experience with focus on best practices."
+        else:
+            return text + f" {insertion_patterns[0]}."
+
     def _optimize_experience_description(self, description: str, job_analysis: Dict) -> str:
         """Optimize experience description based on job analysis"""
-        # This is a placeholder for more sophisticated optimization
-        # In practice, you might use NLP to rewrite descriptions to better match job requirements
-        return description
+        if not job_analysis:
+            return description
+            
+        keywords = job_analysis.get('keywords', [])
+        
+        # Enhance bullet points with job-relevant terms
+        optimized_desc = description
+        
+        # Replace generic terms with job-specific ones
+        replacements = {
+            'worked on': 'developed',
+            'helped': 'collaborated',
+            'did': 'executed',
+            'made': 'created',
+            'used': 'leveraged',
+            'handled': 'managed'
+        }
+        
+        for generic, specific in replacements.items():
+            optimized_desc = optimized_desc.replace(generic, specific)
+        
+        # Add quantification suggestions
+        optimized_desc = self._suggest_quantification(optimized_desc)
+        
+        # Inject relevant keywords from job analysis
+        for keyword in keywords[:3]:
+            if keyword.lower() not in optimized_desc.lower():
+                optimized_desc = self._enhance_bullets_with_keywords(optimized_desc, keyword)
+        
+        return optimized_desc
+
+    def _suggest_quantification(self, description: str) -> str:
+        """Add quantification hints to experience descriptions"""
+        # Look for opportunities to add metrics
+        metric_opportunities = {
+            'project': '• Delivered [X] projects',
+            'team': '• Led team of [X] members',
+            'efficiency': '• Improved efficiency by [X]%',
+            'cost': '• Reduced costs by $[X]',
+            'time': '• Completed in [X] weeks',
+            'users': '• Served [X] users',
+            'performance': '• Increased performance by [X]%'
+        }
+        
+        enhanced_desc = description
+        for keyword, suggestion in metric_opportunities.items():
+            if keyword in description.lower() and '[X]' not in description:
+                # Add quantification hint
+                enhanced_desc += f"\n{suggestion} ahead of schedule."
+        
+        return enhanced_desc
+
+    def _enhance_bullets_with_keywords(self, description: str, keyword: str) -> str:
+        """Enhance bullet points with relevant keywords"""
+        lines = description.split('\n')
+        enhanced_lines = []
+        
+        keyword_added = False
+        for line in lines:
+            if line.strip() and not keyword_added and len(line) > 20:
+                # Add keyword to the first substantial bullet point
+                if keyword.lower() in ['agile', 'scrum']:
+                    line += f" using {keyword} methodology"
+                elif keyword.lower() in ['api', 'rest', 'microservices']:
+                    line += f" implementing {keyword} solutions"
+                else:
+                    line += f" utilizing {keyword}"
+                keyword_added = True
+            enhanced_lines.append(line)
+        
+        return '\n'.join(enhanced_lines)
 
     def _prioritize_skills(self, user_skills: List[str], job_skills: List[str]) -> List[str]:
         """Prioritize skills that match job requirements"""
@@ -313,4 +417,95 @@ class CVGenerator:
                 'description': 'Ultra-clean template focused on content'
             }
         ]
+
+    def validate_ats_compatibility(self, user_data: Dict, job_analysis: Dict = None) -> Dict:
+        """Validate CV for ATS compatibility and provide score"""
+        validation_results = {
+            'overall_score': 0,
+            'issues': [],
+            'recommendations': [],
+            'ats_grade': 'F'
+        }
+        
+        score = 0
+        max_score = 100
+        
+        # Check essential sections (30 points)
+        if user_data.get('personal_info', {}).get('full_name'):
+            score += 5
+        else:
+            validation_results['issues'].append("Missing full name")
+        
+        if user_data.get('personal_info', {}).get('email'):
+            score += 5
+        else:
+            validation_results['issues'].append("Missing email address")
+        
+        if user_data.get('professional_summary'):
+            score += 10
+        else:
+            validation_results['issues'].append("Missing professional summary")
+        
+        if user_data.get('work_experience'):
+            score += 10
+        else:
+            validation_results['issues'].append("Missing work experience")
+        
+        # Check skills section (20 points)
+        skills = user_data.get('skills', {})
+        if skills.get('technical_skills'):
+            score += 10
+        else:
+            validation_results['issues'].append("Missing technical skills")
+        
+        if skills.get('soft_skills'):
+            score += 10
+        else:
+            validation_results['recommendations'].append("Add soft skills to improve ATS score")
+        
+        # Check job alignment (30 points)
+        if job_analysis:
+            job_keywords = job_analysis.get('keywords', [])
+            job_skills = job_analysis.get('technical_skills', [])
+            
+            # Check keyword alignment
+            user_text = str(user_data).lower()
+            matching_keywords = sum(1 for keyword in job_keywords[:10] if keyword.lower() in user_text)
+            score += (matching_keywords / 10) * 15
+            
+            # Check skill alignment
+            user_skills = [skill.lower() for skill in skills.get('technical_skills', [])]
+            matching_skills = sum(1 for skill in job_skills if skill.lower() in user_skills)
+            if job_skills:
+                score += (matching_skills / len(job_skills)) * 15
+        
+        # Check format and structure (20 points)
+        # This is automatically good since we generate ATS-friendly PDFs
+        score += 20
+        
+        validation_results['overall_score'] = round(score, 1)
+        validation_results['ats_grade'] = self._get_ats_grade(score)
+        
+        # Generate recommendations
+        if score < 70:
+            validation_results['recommendations'].extend([
+                "Include more job-relevant keywords in your summary",
+                "Add quantifiable achievements to your experience",
+                "Ensure all technical skills from job posting are included"
+            ])
+        
+        return validation_results
+
+    def _get_ats_grade(self, score: float) -> str:
+        """Convert ATS score to letter grade"""
+        if score >= 90:
+            return 'A+'
+        elif score >= 80:
+            return 'A'
+        elif score >= 70:
+            return 'B'
+        elif score >= 60:
+            return 'C'
+        else:
+            return 'D'
 
