@@ -13,6 +13,36 @@ Before you start, make sure you have:
 
 ## ⚡ 5-Minute Setup
 
+### Option 1: Automated Setup (Recommended)
+
+**For macOS/Linux:**
+```bash
+# Clone and run
+git clone https://github.com/yourusername/ats-smart-cv-generator.git
+cd ats-smart-cv-generator
+./start.sh
+```
+
+**For Windows:**
+```cmd
+# Clone and run
+git clone https://github.com/yourusername/ats-smart-cv-generator.git
+cd ats-smart-cv-generator
+start.bat
+```
+
+The script will automatically:
+- ✅ Check prerequisites
+- ✅ Set up virtual environments
+- ✅ Install all dependencies
+- ✅ Download NLTK data
+- ✅ Start both servers
+- ✅ Open the application in your browser
+
+### Option 2: Manual Setup
+
+If you prefer manual setup or need more control:
+
 ### Step 1: Clone the Repository
 
 ```bash
