@@ -16,6 +16,7 @@ Before you start, make sure you have:
 ### Option 1: Automated Setup (Recommended)
 
 **For macOS/Linux:**
+
 ```bash
 # Clone and run
 git clone https://github.com/yourusername/ats-smart-cv-generator.git
@@ -24,6 +25,7 @@ cd ats-smart-cv-generator
 ```
 
 **For Windows:**
+
 ```cmd
 # Clone and run
 git clone https://github.com/yourusername/ats-smart-cv-generator.git
@@ -32,6 +34,7 @@ start.bat
 ```
 
 The script will automatically:
+
 - ✅ Check prerequisites
 - ✅ Set up virtual environments
 - ✅ Install all dependencies
@@ -96,32 +99,37 @@ npm run dev
 
 ### Step 4: Access the Application
 
-Open your browser and go to: **http://localhost:5173**
+Open your browser and go to: <http://localhost:5173>
 
 ---
 
 ## 🎯 How to Use
 
 ### 1. **Job Description Analysis**
+
 - Paste the job description you want to tailor your CV for
-- Click "Analyze Job Description" 
+- Click "Analyze Job Description"
 - The system will extract keywords and requirements
 
 ### 2. **Personal Information**
+
 - Fill in your contact details
 - Full Name, Email, Phone, Location, LinkedIn
 
 ### 3. **Work Experience**
+
 - Add your work history
 - Include job titles, companies, dates, and descriptions
 - Use bullet points for achievements
 
 ### 4. **Education & Skills**
+
 - Add your educational background
 - List technical skills, soft skills, languages, certifications
 - Separate multiple items with commas
 
 ### 5. **Generate CV**
+
 - Review optimization suggestions
 - Click "Generate CV"
 - Download your ATS-optimized PDF
@@ -133,18 +141,21 @@ Open your browser and go to: **http://localhost:5173**
 ### Backend Issues
 
 **Problem:** `ModuleNotFoundError: No module named 'flask'`
+
 ```bash
 # Solution: Install dependencies
 pip install -r requirements.txt
 ```
 
 **Problem:** `LookupError: Resource punkt not found`
+
 ```bash
 # Solution: Download NLTK data
 python -c "import nltk; nltk.download('punkt'); nltk.download('stopwords'); nltk.download('punkt_tab')"
 ```
 
 **Problem:** `Address already in use` (Port 5002)
+
 ```bash
 # Solution: Kill process on port 5002
 lsof -ti:5002 | xargs kill -9
@@ -154,15 +165,18 @@ lsof -ti:5002 | xargs kill -9
 ### Frontend Issues
 
 **Problem:** `command not found: npm`
+
 - **Solution:** Install Node.js from [nodejs.org](https://nodejs.org/)
 
 **Problem:** `Error: Cannot find module`
+
 ```bash
 # Solution: Install dependencies
 npm install
 ```
 
 **Problem:** Port 5173 already in use
+
 ```bash
 # Solution: Kill process or use different port
 npm run dev -- --port 3000
@@ -171,6 +185,7 @@ npm run dev -- --port 3000
 ### API Connection Issues
 
 **Problem:** API calls failing
+
 1. Ensure backend is running on port 5002
 2. Check if `http://localhost:5002/api/health` returns a response
 3. Verify proxy configuration in `cv-generator-frontend/vite.config.js`
@@ -209,11 +224,12 @@ docker-compose up --build
 
 ## ✅ Verification Checklist
 
-- [ ] Backend running on http://localhost:5002
-- [ ] Frontend running on http://localhost:5173
+- [ ] Backend running on <http://localhost:5002>
+- [ ] Frontend running on <http://localhost:5173>
 - [ ] Can access application in browser
 - [ ] Job analysis works (Step 1)
 - [ ] Can fill out forms (Steps 2-4)
 - [ ] Can generate and download CV (Step 5)
 
-**Happy CV building! 🎉**
+## Happy CV building! 🎉
+
