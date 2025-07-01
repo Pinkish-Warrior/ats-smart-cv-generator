@@ -1,5 +1,11 @@
 # ATS-Smart CV Generator
 
+![Status](https://img.shields.io/badge/status-active-brightgreen)
+![Version](https://img.shields.io/badge/version-1.0.0-blue)
+![License](https://img.shields.io/badge/license-MIT-green)
+![Python](https://img.shields.io/badge/python-3.8+-blue)
+![Node](https://img.shields.io/badge/node-16+-green)
+
 A full-stack application that analyzes job descriptions and generates ATS-optimized CVs tailored to specific job requirements.
 
 ## � Documentation
