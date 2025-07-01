@@ -1,0 +1,83 @@
+# General
+.DS_Store
+.env
+.env.local
+.env.production
+*.log
+*.pid
+*.seed
+*.lock
+
+# Backend (Python)
+cv-generator-backend/__pycache__/
+cv-generator-backend/*.pyc
+cv-generator-backend/*.pyo
+cv-generator-backend/*.pyd
+cv-generator-backend/.Python
+cv-generator-backend/env/
+cv-generator-backend/venv/
+cv-generator-backend/ENV/
+cv-generator-backend/env.bak/
+cv-generator-backend/venv.bak/
+cv-generator-backend/src/__pycache__/
+cv-generator-backend/src/*/__pycache__/
+cv-generator-backend/src/*/*/__pycache__/
+cv-generator-backend/*.egg-info/
+cv-generator-backend/dist/
+cv-generator-backend/build/
+cv-generator-backend/.pytest_cache/
+cv-generator-backend/.coverage
+cv-generator-backend/htmlcov/
+cv-generator-backend/backend.log
+
+# Database
+cv-generator-backend/src/database/app.db
+cv-generator-backend/instance/
+*.db
+*.sqlite
+*.sqlite3
+
+# Generated CVs (temporary files)
+cv-generator-backend/tmp/
+/tmp/cv_*.pdf
+
+# Frontend (Node.js/React)
+cv-generator-frontend/node_modules/
+cv-generator-frontend/dist/
+cv-generator-frontend/build/
+cv-generator-frontend/.vite/
+cv-generator-frontend/.next/
+cv-generator-frontend/out/
+cv-generator-frontend/coverage/
+cv-generator-frontend/.nyc_output/
+cv-generator-frontend/.cache/
+cv-generator-frontend/frontend.log
+cv-generator-frontend/frontend_new.log
+
+# Dependencies
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# IDE & Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS generated files
+Thumbs.db
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
